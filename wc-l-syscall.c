@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -35,11 +36,13 @@ static void
 do_word_count(int fd, const char *path)
 {
   unsigned long count = 0;
+
   for (;;) {
     unsigned char buf[BUFFER_SIZE];
     int n = read(fd, buf, sizeof buf);
     if (n < 0) die(path);
     if (n == 0) break;
+
     unsigned long i;
     for (i = 0; i < BUFFER_SIZE; i++) {
       if (buf[i] == '\n') {
