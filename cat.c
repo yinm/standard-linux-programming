@@ -1,4 +1,4 @@
-// 2nd
+// 3rd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -37,11 +37,12 @@ do_cat(const char *path)
 
   fd = open(path, O_RDONLY);
   if (fd < 0) die(path);
+
   for (;;) {
     n = read(fd, buf, sizeof buf);
     if (n < 0) die(path);
     if (n == 0) break;
-    if (write(STDOUT_FILENO, buf, n) < 0) die(path);
+    if (write(STDOUT_FILENO, buf, n) < 0) die (path);
   }
 
   if (close(fd) < 0) die(path);
