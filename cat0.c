@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -18,6 +19,7 @@ main(int argc, char *argv[])
     if (n == 0) break;
     n = write(STDOUT_FILENO, buf, n);
   }
+
   close(fd);
   exit(0);
 }
