@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,6 +19,7 @@ main(int argc, char *argv[])
         perror(argv[i]);
         exit(1);
       }
+
       do_cat(f);
       fclose(f);
     }
