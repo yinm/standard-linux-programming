@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,7 +20,6 @@ main(int argc, char *argv[])
     while ((c = fgetc(f)) != EOF) {
       if (putchar(c) < 0) exit(1);
     }
-
     fclose(f);
   }
 
