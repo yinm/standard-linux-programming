@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,6 +12,7 @@ main(int argc, char *argv[])
     fprintf(stderr, "%s: file name not given\n", argv[0]);
     exit(1);
   }
+
   int i;
   for (i = 1; i < argc; i++) {
     do_cat(argv[i]);
@@ -25,11 +27,14 @@ static void
 do_cat(const char *path)
 {
   unsigned char buf[BUFFER_SIZE];
+  
   FILE *f = fopen(path, "r");
   if (!f) die(path);
+
   for (;;) {
     size_t n_read = fread(buf, 1, sizeof buf, f);
     if (ferror(f)) die(path);
+
     size_t n_written = fwrite(buf, 1, n_read, stdout);
     if (n_written < n_read) die(path);
     if (n_read < sizeof buf) break;
