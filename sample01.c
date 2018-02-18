@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <unistd.h>
 
@@ -21,7 +22,7 @@ main(int argc, char *argv[])
             case 'x':
                 puts("-x");
                 break;
-            default: // '?'
+            default:
                 puts("?");
                 break;
         }
