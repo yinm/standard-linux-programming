@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -36,6 +37,7 @@ main(int argc, char *argv[])
         perror(argv[i]);
         exit(1);
       }
+
       do_head(f, nlines);
       fclose(f);
     }
