@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -26,10 +27,10 @@ main(int argc, char *argv[])
         nlines = atol(optarg);
         break;
       case 'h':
-        fprintf(stdout, "Usage: %s [-n LINES] [FILE ...]\n", argv[0]);
+        fprintf(stdout, "Usage: %s [-n LINES] [FILE...]\n", argv[0]);
         exit(0);
       case '?':
-        fprintf(stderr, "Usage: %s [-n LINES] [FILE ...]\n", argv[0]);
+        fprintf(stderr, "Usage: %s [-n LINES] [FILE...]\n", argv[0]);
         exit(1);
     }
   }
@@ -47,6 +48,7 @@ main(int argc, char *argv[])
         perror(argv[i]);
         exit(1);
       }
+
       do_head(f, nlines);
       fclose(f);
     }
