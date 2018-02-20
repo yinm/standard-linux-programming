@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -21,9 +22,9 @@ main(int argc, char *argv[])
         exit(1);
     }
   }
-
   argc -= optind;
   argv += optind;
+
   if (argc == 0) {
     do_cat(stdin, escape);
   }
