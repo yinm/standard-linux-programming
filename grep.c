@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -25,7 +26,6 @@ main(int argc, char *argv[])
     puts(buf);
     exit(1);
   }
-  
   if (argc == 2) {
     do_grep(&pat, stdin);
   }
@@ -42,7 +42,6 @@ main(int argc, char *argv[])
       fclose(f);
     }
   }
-
   regfree(&pat);
   exit(0);
 }
