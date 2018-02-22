@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -55,7 +56,6 @@ do_slice(regex_t *pat, FILE *src)
 
   while (fgets(buf, sizeof buf, src)) {
     regmatch_t matched[1];
-
     if (regexec(pat, buf, 1, matched, 0) == 0) {
       char *str = buf + matched[0].rm_so;
       regoff_t len = matched[0].rm_eo - matched[0].rm_so;
