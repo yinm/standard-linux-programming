@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,9 +16,9 @@ int
 main(int argc, char *argv[])
 {
   int opt;
-  
+
   while ((opt = getopt(argc, argv, "iv")) != -1) {
-    switch (opt) {
+    switch(opt) {
       case 'i':
         opt_ignorecase = 1;
         break;
@@ -29,6 +30,7 @@ main(int argc, char *argv[])
         exit(1);
     }
   }
+
   argc -= optind;
   argv += optind;
 
@@ -42,9 +44,9 @@ main(int argc, char *argv[])
 
   int re_mode = REG_EXTENDED | REG_NOSUB | REG_NEWLINE;
   if (opt_ignorecase) re_mode |= REG_ICASE;
+
   regex_t re;
   int err = regcomp(&re, pattern, re_mode);
-
   if (err != 0) {
     char buf[1024];
 
@@ -58,7 +60,6 @@ main(int argc, char *argv[])
   }
   else {
     int i;
-
     for (i = 0; i < argc; i++) {
       grep_file(&re, argv[i]);
     }
@@ -91,11 +92,9 @@ grep_stream(regex_t *re, FILE *f)
 
   while (fgets(buf, sizeof buf, f)) {
     matched = (regexec(re, buf, 0, NULL, 0) == 0);
-
     if (opt_invert) {
       matched = !matched;
     }
-
     if (matched) {
       fputs(buf, stdout);
     }
