@@ -22,7 +22,7 @@ main(int argc, char *argv[])
     die(argv[1]);
   }
 
-  if (unlink(argv[1]) < 0) {
+  if (rename(argv[2], argv[3]) < 0) {
     die(argv[1]);
   }
 
