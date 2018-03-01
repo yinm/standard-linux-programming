@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -20,7 +21,6 @@ main(int argc, char *argv[])
     perror(argv[1]);
     exit(1);
   }
-
   printf("type\t%o (%s)\n", (st.st_mode & S_IFMT), filetype(st.st_mode));
   printf("mode\t%o\n", st.st_mode & ~S_IFMT);
   printf("dev\t%llu\n", (unsigned long long)st.st_dev);
@@ -29,7 +29,7 @@ main(int argc, char *argv[])
   printf("nlink\t%lu\n", (unsigned long)st.st_nlink);
   printf("uid\t%d\n", st.st_uid);
   printf("gid\t%d\n", st.st_gid);
-  printf("size\t%d\n", st.st_size);
+  printf("size\t%ld\n", st.st_size);
   printf("blksize\t%lu\n", (unsigned long)st.st_blksize);
   printf("blocks\t%lu\n", (unsigned long)st.st_blocks);
   printf("atime\t%s", ctime(&st.st_atime));
