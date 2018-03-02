@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
@@ -26,13 +27,11 @@ main(int argc, char *argv[])
     fprintf(stderr, "missing dirname\n");
     exit(1);
   }
-
   fd = open(argv[1], O_RDONLY);
   if (fd < 0) {
     perror(argv[1]);
     exit(1);
   }
-
   for (;;) {
     char buf[1024];
     int n;
@@ -42,7 +41,6 @@ main(int argc, char *argv[])
       perror("getdents(2)");
       exit(1);
     }
-
     if (n == 0) break;
 #ifdef PRETTY_PRINT
     print_dirents(buf, n);
