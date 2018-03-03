@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,7 +12,6 @@ main(int argc, char *argv[])
     fprintf(stderr, "Usage: %s n\n", argv[0]);
     exit(1);
   }
-
   tail(stdin, atoi(argv[1]));
   exit(0);
 }
@@ -36,7 +36,9 @@ tail(FILE *f, int nlines)
   if (ringbuf == NULL) exit(1);
   p = ringbuf;
   while (line = readline(f)) {
-    if (*p) free(*p);
+    if (*p) {
+      free(*p);
+    }
     *p = line;
     INC(p);
   }
@@ -59,7 +61,6 @@ readline(FILE *f)
 
   buf = p = malloc(sizeof(char) * buflen);
   if (buf == NULL) exit(1);
-
   for (;;) {
     c = getc(f);
     if (c == EOF) {
@@ -69,13 +70,13 @@ readline(FILE *f)
       }
       break;
     }
-
     *p++ = c;
     if (p >= buf + buflen - 1) {
       buflen *= 2;
       buf = realloc(buf, buflen);
       if (buf == NULL) exit(1);
     }
+
     if (c == '\n') break;
   }
 
