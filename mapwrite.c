@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -13,17 +14,17 @@ main(int argc, char *argv[])
   char *ptr;
   int len = 3;
 
+  // prepare data file
   unlink(DATAFILE);
   fd = open(DATAFILE, O_WRONLY|O_CREAT, 0666);
-
   if (fd < 0) {
     perror(DATAFILE);
     exit(1);
   }
-
   write(fd, "NO\n", 3);
   close(fd);
 
+  // write by mmap
   fd = open(DATAFILE, O_RDWR);
   if (fd < 0) {
     perror(DATAFILE);
@@ -40,6 +41,7 @@ main(int argc, char *argv[])
   ptr[2] = '\n';
   munmap(ptr, len);
 
+  // cat it
   system("cat " DATAFILE);
 
   exit(0);
