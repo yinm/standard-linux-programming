@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -17,57 +18,57 @@ int
 main(int argc, char *argv[])
 {
   puts("<<execl>>");
-  if (fork() != 0) {  // parent
+  if (fork() != 0) {
     wait(NULL);
   }
-  else {  // child
+  else {
     execl("./args", "PROGNAME", "called by execl", NULL);
     die("execl");
   }
 
   puts("<<execlp>>");
-  if (fork() != 0) {  // parent
+  if (fork() != 0) {
     wait(NULL);
   }
-  else {  // child
+  else {
     execlp("./args", "PROGNAME", "called by execlp", NULL);
     die("execlp");
   }
 
   puts("<<execle>>");
-  if (fork() != 0) {  // parent
+  if (fork() != 0) {
     wait(NULL);
   }
-  else {  // child
+  else {
     execle("./args", "PROGNAME", "called by execle", NULL, environ);
     die("execle");
   }
 
   puts("<<execv>>");
-  if (fork() != 0) {  // parent
+  if (fork() != 0) {
     wait(NULL);
   }
-  else {  // child
+  else {
     char *args[4] = { "PROGNAME", "called by execv", NULL };
     execv("./args", args);
     die("execv");
   }
 
   puts("<<execvp>>");
-  if (fork() != 0) {  // parent
+  if (fork() != 0) {
     wait(NULL);
   }
-  else {  // child
+  else {
     char *args[4] = { "PROGNAME", "called by execvp", NULL };
     execvp("./args", args);
     die("execvp");
   }
 
   puts("<<execve>>");
-  if (fork() != 0) {  // parent
+  if (fork() != 0) {
     wait(NULL);
   }
-  else {  // child
+  else {
     char *args[4] = { "PROGNAME", "called by execve", NULL };
     execve("./args", args, environ);
     die("execve");
