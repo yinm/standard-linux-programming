@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,8 +15,8 @@ readshow(int fd)
     perror("read");
     exit(1);
   }
-
-  if (n == 0) exit(0);
+  if (n == 0)
+    exit(0);
   switch (buf[0]) {
     case ' ':  strcpy(buf, "' '"); break;
     case '\n': strcpy(buf, "\\n"); break;
@@ -26,7 +27,6 @@ readshow(int fd)
       buf[1] = '\0';
       break;
   }
-
   printf("fd%d: %s\n", fd, buf);
 }
 
