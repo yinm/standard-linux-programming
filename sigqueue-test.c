@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -13,9 +14,8 @@ trap_signal(int sig, sighandler_t handler)
   act.sa_handler = handler;
   sigemptyset(&act.sa_mask);
   act.sa_flags = SA_RESTART;
-  if (sigaction(sig, &act, &old) < 0) {
+  if (sigaction(sig, &act, &old) < 0)
     return NULL;
-  }
 
   return old.sa_handler;
 }
