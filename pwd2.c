@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -13,14 +14,13 @@ my_getcwd(void)
 
     buf = malloc(size);
     if (!buf) return NULL;
-
     for (;;) {
         errno = 0;
         if (getcwd(buf, size)) {
             return buf;
         }
-
         if (errno != ERANGE) break;
+
         size *= 2;
         tmp = realloc(buf, size);
         if (!tmp) break;
