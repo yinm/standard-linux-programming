@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -19,6 +20,7 @@ main(int argc, char *argv[])
         perror(argv[1]);
         exit(1);
     }
+
     printf("id=%d\n", pw->pw_uid);
     exit(0);
 }
