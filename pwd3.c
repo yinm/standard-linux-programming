@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -8,7 +9,6 @@ main(int argc, char *argv[])
     char *path;
 
     path = getcwd(NULL, 0);
-
     if (!path) {
         perror(path);
         exit(1);
