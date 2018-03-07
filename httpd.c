@@ -173,6 +173,16 @@ read_header_field(FILE *in)
 }
 
 static void
+upcase(char *str)
+{
+    char *p;
+
+    for (p = str; *p; p++) {
+        *p = (char)toupper((int)*p);
+    }
+}
+
+static void
 free_request(struct HTTPRequest *req)
 {
     struct HTTPHeaderField *h, *head;
