@@ -214,6 +214,19 @@ content_length(struct HTTPRequest *req)
     return len;
 }
 
+static char*
+lookup_header_field_value(struct HTTPRequest *req, char *name)
+{
+    struct HTTPHeaderField *h;
+
+    for (h = req->header; h; h = h->next) {
+        if (strcasecmp(h->name, name) == 0)
+            return h->value;
+    }
+
+    return NULL;
+}
+
 static void*
 xmalloc(size_t sz)
 {
