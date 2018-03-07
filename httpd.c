@@ -12,9 +12,27 @@
 #include <ctype.h>
 #include <signal.h>
 
+/****** Constants ********************************************************/
+
+/****** Data Type Definitions ********************************************/
+
 /****** Function Prototypes **********************************************/
 
 typedef void (*sighandler_t)(int);
+
+/****** Functions ********************************************************/
+
+int
+main(int argc, char *argv[])
+{
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <docroot>\n", argv[0]);
+        exit(1);
+    }
+    install_signal_handlers();
+    service(stdin, stdout, argv[1]);
+    exit(0);
+}
 
 static void
 install_signal_handlers(void)
