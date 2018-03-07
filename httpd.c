@@ -12,6 +12,16 @@
 #include <ctype.h>
 #include <signal.h>
 
+static void*
+xmalloc(size_t sz)
+{
+    void *p;
+
+    p = malloc(sz);
+    if (!p) log_exit("failed to allocate memory");
+    return p;
+}
+
 static void
 log_exit(char *fmt, ...)
 {
