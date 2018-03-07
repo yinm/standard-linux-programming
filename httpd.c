@@ -14,6 +14,7 @@
 
 /****** Constants ********************************************************/
 
+#define LINE_BUF_SIZE 4096
 #define MAX_REQUEST_BODY_LENGTH (1024 * 1024)
 
 /****** Data Type Definitions ********************************************/
@@ -114,6 +115,35 @@ read_request(FILE *in)
     }
 
     return req;
+}
+
+static void
+read_request_line(struct HTTPRequest *req, FILE *in)
+{
+    char buf[LINE_BUF_SIZE];
+    char *path *p;
+
+    if (!fgets(buf, LINE_BUF_SIZE, in))
+        log_exit("no request line");
+
+    p = strchr(buf, ' ');   // p (1)
+    if (!p) log_exit("parse error on request line (1): %s", buf);
+    *p++ = '\0';
+    req->method = xmalloc(p - buf);
+    strcpy(req->method, buf);
+    upcase(req->method);
+
+    path = p;
+    p = strchr(path, ' ');  // p (2)
+    if (!p) log_exit("parse error on request line (2): %s", buf);
+    *p++ = '\0';
+    req->path = xmalloc(p - path);
+    strcpy(req->path, path);
+
+    if (strncasecmp(p, "HTTP/1.", strlen("HTTP/1.")) != 0)
+        log_exit("parse error on request line (3): %s", buf);
+    p += strlen("HTTP/1."); // p(3)
+    req->protocol_minor_version = atoi(p);
 }
 
 static void
