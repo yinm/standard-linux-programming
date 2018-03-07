@@ -16,6 +16,21 @@
 
 /****** Data Type Definitions ********************************************/
 
+struct HTTPHeaderField {
+    char *name;
+    char *value;
+    struct HTTPHeaderField *next;
+};
+
+struct HTTPRequest {
+    int protocol_minor_version;
+    char *method;
+    char *path;
+    struct HTTPHeaderField *header;
+    char *body;
+    long length;
+};
+
 /****** Function Prototypes **********************************************/
 
 typedef void (*sighandler_t)(int);
