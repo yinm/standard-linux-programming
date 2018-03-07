@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -27,13 +28,10 @@ main(int argc, char *argv[])
         fmt[2] = *p;
         fmt[3] = '"';
         fmt[4] = '\0';
-
-        if (strftime(buf, sizeof buf, fmt, tm) == 0) {
+        if (strftime(buf, sizeof buf, fmt, tm) == 0)
             puts("FAILED");
-        }
-        else {
+        else  
             puts(buf);
-        }
 
         if (strchr(opt_E, *p)) {
             printf("%%E%c=", *p);
@@ -43,12 +41,10 @@ main(int argc, char *argv[])
             fmt[3] = *p;
             fmt[4] = '"';
             fmt[5] = '\0';
-            if (strftime(buf, sizeof buf, fmt, tm) == 0) {
+            if (strftime(buf, sizeof buf, fmt, tm) == 0)
                 puts("FAILED");
-            }
-            else {
+            else
                 puts(buf);
-            }
         }
 
         if (strchr(opt_O, *p)) {
@@ -59,12 +55,10 @@ main(int argc, char *argv[])
             fmt[3] = *p;
             fmt[4] = '"';
             fmt[5] = '\0';
-            if (strftime(buf, sizeof buf, fmt, tm) == 0) {
+            if (strftime(buf, sizeof buf, fmt, tm) == 0)
                 puts("FAILED");
-            }
-            else {
+            else
                 puts(buf);
-            }
         }
     }
 
