@@ -1,3 +1,4 @@
+// 2nd
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -20,10 +21,10 @@ main(int argc, char *argv[])
         fprintf(stderr, "%s: no arguments\n", argv[0]);
         exit(1);
     }
+
     for (i = 1; i < argc; i++) {
         do_ls(argv[i]);
     }
-
     exit(0);
 }
 
@@ -41,21 +42,20 @@ do_ls(char *path)
         char *buf = allocate_path_buffer(strlen(path) + 1 + strlen(ent->d_name));
         // sprintf does NOT cause buffer overflow here, because we calculate required buffer length beforehand.
         sprintf(buf, "%s/%s", path, ent->d_name);
-        
+
         struct stat st;
         if (lstat(buf, &st) < 0) die(buf);
         char *mtime = ctime(&st.st_mtime);
         mtime[strlen(mtime) - 1] = '\0';    // ctime returns a string terminated by '\n', remove it
 
         struct passwd *pw = getpwuid(st.st_uid);
-        if (pw) {   // passwd entry found
+        if (pw) {   // passed entry found
             printf("%s owner=%s mtime=%s\n", ent->d_name, pw->pw_name, mtime);
         }
         else {
             printf("%s owner=%d mtime=%s\n", ent->d_name, st.st_uid, mtime);
         }
     }
-
     closedir(d);
 }
 
