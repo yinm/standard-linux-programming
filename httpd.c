@@ -249,6 +249,16 @@ get_fileinfo(char *docroot, char *urlpath)
     return info;
 }
 
+static char *
+build_fspath(char *docroot, char *urlpath)
+{
+    char *path;
+
+    path = xmalloc(strlen(docroot) + 1 + strlen(urlpath) + 1);
+    sprintf(path, "%s/%s", docroot, urlpath);
+    return path;
+}
+
 static void*
 xmalloc(size_t sz)
 {
