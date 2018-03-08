@@ -14,6 +14,9 @@
 
 /****** Constants ********************************************************/
 
+#define SERVER_NAME "LittleHTTP"
+#define SERVER_VERSION "1.0"
+#define HTTP_MINOR_VERSION 0
 #define BLOCK_BUF_SIZE 1024
 #define LINE_BUF_SIZE 4096
 #define MAX_REQUEST_BODY_LENGTH (1024 * 1024)
@@ -285,6 +288,25 @@ do_file_response(struct HTTPRequest *req, FILE *out, char *docroot)
 
     fflush(out);
     free_fileinfo(info);
+}
+
+#define TIME_BUF_SIZE 64
+
+static void
+output_common_header_fields(struct HTTPRequest *req, FILE *out, char *status)
+{
+    time_t t;
+    struct tm *tm;
+    char buf[TIME_BUF_SIZE];
+
+    t = time(NULL);
+    tm = gmtime(&t);
+    if (!tm) log_exit("gmtime() failed: %s", strerror(errno));
+    strftime(buf, TIME_BUF_SIZE, "%a, %d %b %Y %H:%M:%S GMT", tm);
+    fprintf(out, "HTTP/1.%d %s\r\n", HTTP_MINOR_VERSION, status);
+    fprintf(out, "Date: %s\r\n", buf);
+    fprintf(out, "Server: %s/%s\r\n", SERVER_NAME, SERVER_VERSION);
+    fprintf(out, "Connection: close\r\n");
 }
 
 static struct FileInfo*
