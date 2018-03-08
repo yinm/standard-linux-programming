@@ -412,6 +412,12 @@ free_fileinfo(struct FileInfo *info)
     free(info);
 }
 
+static char*
+guess_content_type(struct FileInfo *info)
+{
+    return "text/plain";
+}
+
 static void*
 xmalloc(size_t sz)
 {
