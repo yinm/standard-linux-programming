@@ -50,6 +50,7 @@ typedef void (*sighandler_t)(int);
 static void install_signal_handlers(void);
 static void trap_signal(int sig, sighandler_t handler);
 static void signal_exit(int sig);
+static void service(FILE *in, FILE *out, char *docroot);
 static struct HTTPRequest* read_request(FILE *in);
 static void read_request_line(struct HTTPRequest *req, FILE *in);
 static struct HTTPHeaderField* read_header_field(FILE *in);
@@ -153,7 +154,7 @@ static void
 read_request_line(struct HTTPRequest *req, FILE *in)
 {
     char buf[LINE_BUF_SIZE];
-    char *path *p;
+    char *path, *p;
 
     if (!fgets(buf, LINE_BUF_SIZE, in))
         log_exit("no request line");
@@ -335,10 +336,10 @@ not_implemented(struct HTTPRequest *req, FILE *out)
     fprintf(out, "Content-Type: text/html\r\n");
     fprintf(out, "\r\n");
     fprintf(out, "<html>\r\n");
-    fpritnf(out, "<header>\r\n");
+    fprintf(out, "<header>\r\n");
     fprintf(out, "<title>501 Not Implemented</title>\r\n");
     fprintf(out, "<header>\r\n");
-    fpritnf(out, "<body>\r\n");
+    fprintf(out, "<body>\r\n");
     fprintf(out, "<p>The request method %s is not implemented</p>\r\n", req->method);
     fprintf(out, "</body>\r\n");
     fprintf(out, "</html>\r\n");
