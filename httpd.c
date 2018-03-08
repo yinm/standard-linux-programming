@@ -345,6 +345,21 @@ not_implemented(struct HTTPRequest *req, FILE *out)
     fflush(out);
 }
 
+static void
+not_found(struct HTTPRequest *req, FILE *out)
+{
+    output_common_header_fields(req, out, "404 Not Found");
+    fprintf(out, "Content-Type: text/html\r\n");
+    fprintf(out, "\r\n");
+    if (strcmp(req->method, "HEAD") != 0) {
+        fprintf(out, "<html>\r\n");
+        fprintf(out, "<header><title>Not Found</title></header>\r\n");
+        fprintf(out, "<body><p>File not found</p></body>\r\n");
+        fprintf(out, "</html>\r\n");
+    }
+    fflush(out);
+}
+
 #define TIME_BUF_SIZE 64
 
 static void
