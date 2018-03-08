@@ -405,6 +405,13 @@ build_fspath(char *docroot, char *urlpath)
     return path;
 }
 
+static void
+free_fileinfo(struct FileInfo *info)
+{
+    free(info->path);
+    free(info);
+}
+
 static void*
 xmalloc(size_t sz)
 {
