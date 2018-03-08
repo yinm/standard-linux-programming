@@ -47,6 +47,28 @@ struct FileInfo {
 /****** Function Prototypes **********************************************/
 
 typedef void (*sighandler_t)(int);
+static void install_signal_handlers(void);
+static void trap_signal(int sig, sighandler_t handler);
+static void signal_exit(int sig);
+static struct HTTPRequest* read_request(FILE *in);
+static void read_request_line(struct HTTPRequest *req, FILE *in);
+static struct HTTPHeaderField* read_header_field(FILE *in);
+static void upcase(char *str);
+static void free_request(struct HTTPRequest *req);
+static long content_length(struct HTTPRequest *req);
+static char* lookup_header_field_value(struct HTTPRequest *req, char *name);
+static void respond_to(struct HTTPRequest *req, FILE *out, char *docroot);
+static void do_file_response(struct HTTPRequest *req, FILE *out, char *docroot);
+static void method_not_allowed(struct HTTPRequest *req, FILE *out);
+static void not_implemented(struct HTTPRequest *req, FILE *out);
+static void not_found(struct HTTPRequest *req, FILE *out);
+static void output_common_header_fields(struct HTTPRequest *req, FILE *out, char *status);
+static struct FileInfo* get_fileinfo(char *docroot, char *path);
+static char* build_fspath(char *docroot, char *path);
+static void free_fileinfo(struct FileInfo *info);
+static char* guess_content_type(struct FileInfo *info);
+static void* xmalloc(size_t sz);
+static void log_exit(char *fmt, ...);
 
 /****** Functions ********************************************************/
 
