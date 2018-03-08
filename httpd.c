@@ -34,6 +34,12 @@ struct HTTPRequest {
     long length;
 };
 
+struct FileInfo {
+    char *path;
+    long size;
+    int ok;
+};
+
 /****** Function Prototypes **********************************************/
 
 typedef void (*sighandler_t)(int);
@@ -225,6 +231,22 @@ lookup_header_field_value(struct HTTPRequest *req, char *name)
     }
 
     return NULL;
+}
+
+static struct FileInfo*
+get_fileinfo(char *docroot, char *urlpath)
+{
+    struct FileInfo *info;
+    struct stat st;
+
+    info = xmalloc(sizeof(struct FileInfo));
+    info->path = build_fspath(docroot, urlpath);
+    info->ok = 0;
+    if (lstat(info->path, &st) < 0) return info;
+    if (!S_ISREG(st.st_mode)) return info;
+    info->ok = 1;
+    info->size = st.st_size;
+    return info;
 }
 
 static void*
