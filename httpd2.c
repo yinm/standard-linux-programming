@@ -159,6 +159,24 @@ main(int argc, char *argv[])
   exit(0);
 }
 
+static void
+detach_children(void)
+{
+  struct sigaction act;
+
+  act.sa_handler = noop_handler;
+  sigemptyset(&act.sa_mask);
+  act.sa_flags = SA_RESTART | SA_NOCLDWAIT;
+  if (sigaction(SIGCHLD, &act, NULL) < 0) {
+    log_exit("sigaction() failed: %s", strerror(errno));
+  }
+}
+
+static void
+noop_handler(int sig)
+{
+  ;
+}
 
 static int
 listen_socket(char *port)
