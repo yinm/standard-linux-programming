@@ -160,6 +160,41 @@ main(int argc, char *argv[])
 }
 
 static void
+setup_environment(char *root, char *user, char *group)
+{
+  struct passwd *pw;
+  struct group *gr;
+
+  if (!user || !group) {
+    fprintf(stderr, "use both of --user and --group\n");
+    exit(1);
+  }
+  gr = getgrnam(group);
+  if (!gr) {
+    fprintf(stderr, "no such group: %s\n", group);
+    exit(1);
+  }
+  if (setgid(gr->gr_gid) < 0) [
+    perror("setgid(2)");
+    exit(1);
+  ]
+  if (initgroups(user, gr->gr_gid) < 0) {
+    perror("initgroups(2)");
+    exit(1);
+  }
+  pw = getpwnam(user);
+  if (!pw) {
+    fprintf(stderr, "no such user: %s\n", user);
+    exit(1);
+  }
+  chroot(root);
+  if (setuid(pw->pw_uid) < 0) {
+    perror("setuid(2)");
+    exit(1);
+  }
+}
+
+static void
 become_daemon(void)
 {
   int n;
