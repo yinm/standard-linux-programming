@@ -252,3 +252,20 @@ server_main(int server_fd, char *docroot)
     close(sock);
   }
 }
+
+static void
+log_exit(const char *fmt, ...)
+{
+  va_list ap;
+
+  va_start(ap, fmt);
+  if (debug_mode) {
+    vfprintf(stderr, fmt, ap);
+    fputc('\n', stderr);
+  }
+  else {
+    vsyslog(LOG_ERR, fmt, ap);
+  }
+  va_end(ap);
+  exit(1);
+}
